@@ -1,6 +1,11 @@
 #!/bin/bash
 
 
+# Install Ansible
+sudo apt-get update
+sudo apt install ansible
+sudo mkdir -p ansible
+
 # InstallDocker.sh
 curl -fsSL -o InstallDocker.sh https://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@raw.githubusercontent.com/yoni702/FinalProject/master/Prerequises_installs/InstallDocker.sh
 chmod 700 InstallDocker.sh 

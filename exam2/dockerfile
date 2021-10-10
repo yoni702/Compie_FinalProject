@@ -1,0 +1,9 @@
+FROM node:14
+
+WORKDIR /home/exam/exam2/NodeJS-EmptySiteTemplate
+
+COPY . .
+
+EXPOSE 8080
+
+CMD [ "node", "NodeJS-EmptySiteTemplate/server.js" ]

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yoni
+  labels:
+    app: yoni
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: yoni
+  template:
+    metadata:
+      labels:
+        app: yoni
+    spec:
+      containers:
+      - name: yoni
+        image: yoni702/exam:3.3
+        ports:
+        - containerPort: 8080

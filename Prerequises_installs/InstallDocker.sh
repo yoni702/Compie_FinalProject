@@ -21,4 +21,6 @@ sudo apt install -y curl wget apt-transport-https
 sudo gpasswd -a $USER docker
 newgrp docker
 
+docker --version
+
 

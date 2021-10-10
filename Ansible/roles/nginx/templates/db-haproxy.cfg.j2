@@ -1,0 +1,8 @@
+listen mysql—cluster
+    bind *:3306
+    mode tcp
+    #option mysql-check user root
+    balance roundrobin
+    {% for host in groups['DB'] %}
+    server mysql-{{ loop. index }} {{ hostvars[host] ['private_ip_address'] }}:3306 check
+    {% endfor %}

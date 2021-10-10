@@ -13,6 +13,6 @@ sudo snap alias microk8s.kubectl kubectl
 sudo usermod -a -G microk8s $USER
 
 # (Enabling addons:)
-# sudo microk8s.enable dns dashboard ingress 
+# sudo microk8s.enable dns dashboard ingress helm prometheus rbac registry
 
 
