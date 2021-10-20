@@ -21,7 +21,7 @@ resource "aws_instance" "Ansible-Controller" {
   }
 
   provisioner "file" {
-    source      = "inventory"
+    source      = "ansible/inventory"
     destination = "/home/ubuntu/ansible/inventory"
   }
 
