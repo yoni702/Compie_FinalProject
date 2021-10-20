@@ -12,38 +12,38 @@ resource "aws_instance" "Ansible-Controller" {
   key_name      = aws_key_pair.mykey.key_name
   
   provisioner "local-exec" {
-    command = "echo -e '[all] \n${aws_instance.WebServer1.private_ip} \n${aws_instance.WebServer2.private_ip}' >> inventory"
+    command = "echo '[all] \n${aws_instance.WebServer1.private_ip} \n${aws_instance.WebServer2.private_ip}' > inventory"
   }
-  provisioner "local-exec" {
-    command = "echo ${aws_instance.WebServer1.private_ip} >> inventory1"
-  }
-
-  provisioner "local-exec" {
-    command = "echo ${aws_instance.WebServer2.private_ip} >> inventory1"
-  }
-  
+ 
   provisioner "file" {
     source      = "script.sh"
     destination = "/tmp/script.sh"
   }
-
-  provisioner "file" {
-    source      = "inventory"
-    destination = "/home/ubuntu/inventory"
-  }
-  
-  provisioner "file" {
-    source      = "mykey"
-    destination = "/home/ubuntu/mykey"
-  }
+ 
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/script.sh",
       "sudo sed -i -e 's/\r$//' /tmp/script.sh", # Remove the spurious CR characters.
       "sudo /tmp/script.sh",
-      "chmod 400 /home/ubuntu/mykey",
+      
     ]
   }
+
+  provisioner "file" {
+    source      = "ansible"
+    destination = "/home/ubuntu"
+  }
+
+  provisioner "file" {
+    source      = "inventory"
+    destination = "/home/ubuntu/ansible/inventory"
+  }
+  
+  provisioner "file" {
+    source      = "ansible.cfg"
+    destination = "/home/ubuntu/ansible/ansible.cfg"
+  }
+  
   connection {
     host        = coalesce(self.public_ip, self.private_ip)
     type        = "ssh"
