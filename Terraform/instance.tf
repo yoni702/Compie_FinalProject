@@ -12,23 +12,9 @@ resource "aws_instance" "Ansible-Controller" {
   key_name      = aws_key_pair.mykey.key_name
   
   provisioner "local-exec" {
-    command = "echo '[all] \n${aws_instance.WebServer1.private_ip} \n${aws_instance.WebServer2.private_ip}' > inventory"
+    command = "echo '[all] \n${aws_instance.WebServer1.private_ip} \n${aws_instance.WebServer2.private_ip}' > ansible/inventory"
   }
  
-  provisioner "file" {
-    source      = "script.sh"
-    destination = "/tmp/script.sh"
-  }
- 
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/script.sh",
-      "sudo sed -i -e 's/\r$//' /tmp/script.sh", # Remove the spurious CR characters.
-      "sudo /tmp/script.sh",
-      
-    ]
-  }
-
   provisioner "file" {
     source      = "ansible"
     destination = "/home/ubuntu"
@@ -38,10 +24,19 @@ resource "aws_instance" "Ansible-Controller" {
     source      = "inventory"
     destination = "/home/ubuntu/ansible/inventory"
   }
-  
+
+
   provisioner "file" {
-    source      = "ansible.cfg"
-    destination = "/home/ubuntu/ansible/ansible.cfg"
+    source      = "script.sh"
+    destination = "/tmp/script.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/script.sh",
+      "sudo sed -i -e 's/\r$//' /tmp/script.sh", # Remove the spurious CR characters.
+      "sudo /tmp/script.sh"
+    ]
   }
   
   connection {
