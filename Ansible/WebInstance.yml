@@ -17,8 +17,6 @@
     #  ansible.builtin.git:
     #        repo: "https://github.com/ishajain140/index_files.git/"
     #        dest: /var/www/html/web
-
-
     - name: Install aptitude using apt
       apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
 

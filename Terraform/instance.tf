@@ -21,6 +21,11 @@ resource "aws_instance" "Ansible-Controller" {
   }
 
   provisioner "file" {
+    source      = "ngnix"
+    destination = "/home/ubuntu"
+  }
+
+  provisioner "file" {
     source      = "ansible/inventory"
     destination = "/home/ubuntu/ansible/inventory"
   }
