@@ -1,6 +1,12 @@
 ---
 - hosts: all
   become: true
+  vars:
+  - create_containers: 1
+  - default_container_name: docker_test
+  - default_container_image: yoni702/exam:3.3
+  - default_container_command: sleep 1d
+
   tasks:
     - name: installing git
       package:
@@ -37,16 +43,37 @@
       pip:
         name: docker
 
-    - name: Log into DockerHub
-      docker_login:
-      username: 
-      password: 
-      email: 
+    - name: Create docker group
+      group:
+       name: "docker"
+       state: present
+
+    - name: Add the user to groups
+      ansible.builtin.user:
+       name: ubuntu
+       shell: /bin/bash
+       groups: sudo,docker
+       append: yes
+
+    #- name: Log into DockerHub
+      #docker_login:
+     # username: 
+      #password: 
+     # email: 
       #registry: your.private.registry.io
       # docker push yoni702/final_q1:tagname
 
-    #- name: Pull default Docker image
-    #  docker_image:
-    #    name: "yoni702/final_q1"
-    #    tag: 7.0
-    #    source: pull
+    - name: Pull default Docker image
+      docker_image:
+        name: "{{default_container_image}}"
+        source: pull
+
+    - name: Create default containers
+      docker_container:
+        name: "{{ default_container_name }}{{ item }}"
+        image: "{{ default_container_image }}"
+        command: "{{ default_container_command }}"
+        state: present
+      with_sequence: count={{ create_containers }}
+
+
