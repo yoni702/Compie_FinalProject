@@ -2,6 +2,17 @@
 - hosts: all
   become: true
   tasks:
+    - name: installing git
+      package:
+         name: git
+         state: present
+ 
+    #- name: cloning git repo
+    #  ansible.builtin.git:
+    #        repo: "https://github.com/ishajain140/index_files.git/"
+    #        dest: /var/www/html/web
+
+
     - name: Install aptitude using apt
       apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
 
@@ -26,7 +37,16 @@
       pip:
         name: docker
 
-    - name: Pull default Docker image
-      docker_image:
-        name: "{{ default_container_image }}"
-        source: pull
+    - name: Log into DockerHub
+      docker_login:
+      username: 
+      password: 
+      email: 
+      #registry: your.private.registry.io
+      # docker push yoni702/final_q1:tagname
+
+    #- name: Pull default Docker image
+    #  docker_image:
+    #    name: "yoni702/final_q1"
+    #    tag: 7.0
+    #    source: pull
