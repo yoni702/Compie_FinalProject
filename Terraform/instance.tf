@@ -12,21 +12,21 @@ resource "aws_instance" "Ansible-Controller" {
   key_name      = aws_key_pair.mykey.key_name
   
   provisioner "local-exec" {
-    command = "echo '[all] \n${aws_instance.WebServer1.private_ip} \n${aws_instance.WebServer2.private_ip}' > ansible/inventory"
+    command = "echo '[all] \n${aws_instance.WebServer1.private_ip} \n${aws_instance.WebServer2.private_ip}' > ../ansible/inventory"
   }
  
   provisioner "file" {
-    source      = "ansible"
+    source      = "../ansible"
     destination = "/home/ubuntu"
   }
 
   provisioner "file" {
-    source      = "ngnix"
+    source      = "../ngnix"
     destination = "/home/ubuntu"
   }
 
   provisioner "file" {
-    source      = "ansible/inventory"
+    source      = "../ansible/inventory"
     destination = "/home/ubuntu/ansible/inventory"
   }
 
