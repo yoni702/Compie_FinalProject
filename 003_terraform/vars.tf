@@ -23,7 +23,7 @@ variable "PATH_TO_PRIVATE_KEY" {
 }
 
 variable "PATH_TO_PUBLIC_KEY" {
-  default = "../mykey/mykey.pub"
+  default = "../002_mykey/mykey.pub"
 }
 
 variable "INSTANCE_USERNAME" {
