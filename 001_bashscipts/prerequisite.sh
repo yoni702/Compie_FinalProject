@@ -50,12 +50,3 @@ else
     echo ok
 fi
 
-echo -n "Igor Do you want to run the Ansible Playbook (y/n)? "
-read answer
-
-if [ "$answer" != "${answer#[Yy]}" ] ;then 
-    sudo ansible-playbook -i /home/ubuntu/004_ansible/inventory /home/ubuntu/004_ansible/WebInstance.yml -u ubuntu   
-else
-    echo ok
-    
-fi
