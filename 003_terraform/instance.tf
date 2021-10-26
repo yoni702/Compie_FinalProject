@@ -16,7 +16,7 @@ resource "aws_instance" "Ansible-Controller" {
   }
 
   provisioner "local-exec" {
-    command = "echo 'ip-Ansible-Controller:${aws_instance.Ansible-Controller.public_ip}' > ../001_bashscipts/vars.conf"
+    command = "echo 'IPANSIBLECONTROLLER=${aws_instance.Ansible-Controller.public_ip}' > ../001_bashscipts/vars.conf"
   }
  
   provisioner "file" {
@@ -28,12 +28,6 @@ resource "aws_instance" "Ansible-Controller" {
     source      = "../005_ngnix"
     destination = "/home/ubuntu"
   }
-
-  provisioner "file" {
-    source      = "../004_ansible/inventory"
-    destination = "/home/ubuntu/ansible/inventory"
-  }
-
 
   provisioner "file" {
     source      = "script.sh"

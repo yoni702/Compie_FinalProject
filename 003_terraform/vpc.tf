@@ -6,7 +6,7 @@ resource "aws_vpc" "masteroll" {
   enable_dns_hostnames = "true"
   enable_classiclink   = "false"
   tags = {
-    Name = "Masteroll"
+    Name = "masteroll"
   }
 }
 

@@ -19,7 +19,7 @@ variable "AMIS" {
 
 
 variable "PATH_TO_PRIVATE_KEY" {
-  default = "../mykey/mykey"
+  default = "../002_mykey/mykey"
 }
 
 variable "PATH_TO_PUBLIC_KEY" {

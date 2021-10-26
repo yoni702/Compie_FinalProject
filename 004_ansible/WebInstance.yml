@@ -4,10 +4,8 @@
   vars:
   - create_containers: 1
   - default_container_name: docker_test
-  - default_container_image: yoni702/final_q1:1.1
+  - default_container_image: yoni702/final_q1:1.2
   - default_container_command: sleep 1d
-  - patting_ssh_port: "22"
-  - patting_http_port: "80"
 
   tasks:
     - name: installing git
@@ -15,10 +13,6 @@
          name: git
          state: present
  
-    #- name: cloning git repo
-    #  ansible.builtin.git:
-    #        repo: "https://github.com/ishajain140/index_files.git/"
-    #        dest: /var/www/html/web
     - name: Install aptitude using apt
       apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
 
@@ -55,14 +49,6 @@
        groups: sudo,docker
        append: yes
 
-    #- name: Log into DockerHub
-      #docker_login:
-     # username: 
-      #password: 
-     # email: 
-      #registry: your.private.registry.io
-      # docker push yoni702/final_q1:tagname
-
     - name: Pull default Docker image
       docker_image:
         name: "{{default_container_image}}"
@@ -73,9 +59,7 @@
         name: "{{ default_container_name }}{{ item }}"
         image: "{{ default_container_image }}"
         command: "{{ default_container_command }}"
-        port: 
-        - "{{patting_ssh_port}}:22"
-        - "{{patting_http_ port}}:8080"
+        port: 80:80
         state: present
       with_sequence: count={{ create_containers }}
 
