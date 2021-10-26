@@ -4,8 +4,10 @@
   vars:
   - create_containers: 1
   - default_container_name: docker_test
-  - default_container_image: yoni702/exam:3.3
+  - default_container_image: yoni702/final_q1:1.1
   - default_container_command: sleep 1d
+  - patting_ssh_port: "22"
+  - patting_http_port: "80"
 
   tasks:
     - name: installing git
@@ -71,6 +73,9 @@
         name: "{{ default_container_name }}{{ item }}"
         image: "{{ default_container_image }}"
         command: "{{ default_container_command }}"
+        port: 
+        - "{{patting_ssh_port}}:22"
+        - "{{patting_http_ port}}:8080"
         state: present
       with_sequence: count={{ create_containers }}
 
