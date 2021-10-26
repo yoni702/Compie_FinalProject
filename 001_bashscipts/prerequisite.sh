@@ -44,7 +44,7 @@ read answer
 
 if [ "$answer" != "${answer#[Yy]}" ] ;then 
     eval $(ssh-agent)
-    ssh-add -K ../002_mykey/mykey
+    ssh-add  ../002_mykey/mykey
     ssh -A ubuntu@"$IPANSIBLECONTROLLER"    
 else
     echo ok
