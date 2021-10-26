@@ -12,21 +12,25 @@ resource "aws_instance" "Ansible-Controller" {
   key_name      = aws_key_pair.mykey.key_name
   
   provisioner "local-exec" {
-    command = "echo '[all] \n${aws_instance.WebServer1.private_ip} \n${aws_instance.WebServer2.private_ip}' > ../ansible/inventory"
+    command = "echo '[all] \n${aws_instance.WebServer1.private_ip} \n${aws_instance.WebServer2.private_ip}' > ../004_ansible/inventory"
+  }
+
+  provisioner "local-exec" {
+    command = "echo 'ip-Ansible-Controller:${aws_instance.Ansible-Controller.public_ip}' > ../001_bashscipts/vars.conf"
   }
  
   provisioner "file" {
-    source      = "../ansible"
+    source      = "../004_ansible"
     destination = "/home/ubuntu"
   }
 
   provisioner "file" {
-    source      = "../ngnix"
+    source      = "../005_ngnix"
     destination = "/home/ubuntu"
   }
 
   provisioner "file" {
-    source      = "../ansible/inventory"
+    source      = "../004_ansible/inventory"
     destination = "/home/ubuntu/ansible/inventory"
   }
 
