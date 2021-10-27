@@ -55,7 +55,7 @@
         source: pull
    
     - name: Run image
-      shell: docker run -d -p 80:80  yoni702/final_q1:1.2
+      shell: docker run -d -p 80:80 -p 443:443 yoni702/final_q1:1.2
       become: yes
    
    
