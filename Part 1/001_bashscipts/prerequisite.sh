@@ -4,42 +4,53 @@
 source vars.conf
 
 #install terraform_______________________________________________________________________
-echo -n "Hi Igor Do you need to install terraform (y/n)? "
+echo -n "Do you need to install terraform (y/n)? "
 read answer
 
 if [ "$answer" != "${answer#[Yy]}" ] ;then 
     echo Yes
     . InstallTerraform.sh
 else
-    echo Not installing terraform
+    echo "Not installing terraform"
 fi
 
 
 #ssh-keygen to mykey folder_______________________________________________________________________
-echo -n "Hi Igor Do you need a new ssh keygen (y/n)? "
+echo -n "Do you need a new ssh-keygen into 002_mykey folder (y/n)? "
 read answer
 
 if [ "$answer" != "${answer#[Yy]}" ] ;then 
     echo Yes
     ssh-keygen -b 2048 -t rsa -f ../002_mykey/mykey -q -N ""
 else
-    echo Not creating ssh-keygen
+    echo "Not creating ssh-keygen"
 fi
 
-# Terraform init in folder & Apply
+# Terraform init in folder _______________________________________________________________________
 
-echo -n "______Do you want to imitialize and apply  terraform______ (y/n)? "
+echo -n "Do you want to initialize the terraform folder (y/n)? "
 read answer
 
 if [ "$answer" != "${answer#[Yy]}" ] ;then 
     echo Yes
     terraform -chdir="../003_terraform/" init 
-    terraform -chdir="../003_terraform/" apply
 else
-    echo Not installing terraform
+    echo "Not installing terraform"
 fi
 
-echo -n "Igor Do you want to login in the Ansible-Controller: $IPANSIBLECONTROLLER  (y/n)? "
+# Terraform Apply_______________________________________________________________________
+echo -n "Do you want to apply terraform configuration (y/n)? "
+read answer
+
+if [ "$answer" != "${answer#[Yy]}" ] ;then 
+    echo Yes
+    terraform -chdir="../003_terraform/" apply
+else
+    echo "Not Apply terraform configuration"
+fi
+
+# Login in Ansible-Controller _______________________________________________________________________
+echo -n "Igor Do you want to login in the Ansible-Controller: $IPANSIBLECONTROLLER by ssh-forwarding (to be able to ssh into privates instances) (y/n)? "
 read answer
 
 if [ "$answer" != "${answer#[Yy]}" ] ;then 
@@ -47,6 +58,6 @@ if [ "$answer" != "${answer#[Yy]}" ] ;then
     ssh-add  ../002_mykey/mykey
     ssh -A ubuntu@"$IPANSIBLECONTROLLER"    
 else
-    echo ok
+    echo "not login in Ansible-Controller: $IPANSIBLECONTROLLER "
 fi
 
