@@ -48,14 +48,14 @@ resource "aws_lb_listener" "front_end" {
 }
 
 # ---------------------------Instance_target_group-----------------------------------
-resource "aws_lb_target_group" "test" {
-  name     = "tf-example-lb-tg"
+resource "aws_lb_target_group" "masterol-target-group" {
+  name     = "masterol-target-group"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = aws_vpc.main.id
+  vpc_id   = aws_vpc.masteroll.id 
+  
 }
-
-resource "aws_vpc" "main" {
+resource "aws_vpc" "masteroll" {
   cidr_block = "10.0.0.0/16"
 }
 
@@ -79,6 +79,7 @@ resource "aws_instance" "test" {
   #aws_instance.WebServer2
 }
 
+ #---------------------------security_group-----------------------------------
 resource "aws_security_group" "allow-alb" {
   vpc_id      = aws_vpc.masteroll.id
   name        = "allow-alb"
