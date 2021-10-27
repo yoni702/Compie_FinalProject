@@ -50,13 +50,11 @@ else
 fi
 
 # Login in Ansible-Controller _______________________________________________________________________
-echo -n "Igor Do you want to login in the Ansible-Controller: $IPANSIBLECONTROLLER by ssh-forwarding (to be able to ssh into privates instances) (y/n)? "
+echo -n "Igor Do you want to login in the Ansible-Controller by ssh-forwarding (to be able to ssh into privates instances) (y/n)? "
 read answer
 
 if [ "$answer" != "${answer#[Yy]}" ] ;then 
-    eval $(ssh-agent)
-    ssh-add  ../002_mykey/mykey
-    ssh -A ubuntu@"$IPANSIBLECONTROLLER"    
+    . Login_in_Ansible_Controller.sh  
 else
     echo "not login in Ansible-Controller: $IPANSIBLECONTROLLER "
 fi
