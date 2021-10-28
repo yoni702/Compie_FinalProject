@@ -3,7 +3,7 @@ resource "aws_lb" "albmasteroll" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.allow-alb.id]
-  depends_on       = [aws_vpc.masteroll]
+  
 
   subnet_mapping {
     subnet_id     = aws_subnet.masteroll-public-1.id
