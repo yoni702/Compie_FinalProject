@@ -38,11 +38,8 @@ resource "aws_instance" "Ansible-Controller" {
     inline = [
       "chmod +x /tmp/script.sh",
       "sudo sed -i -e 's/\r$//' /tmp/script.sh", # Remove the spurious CR characters.
-      "sudo /tmp/script.sh",
-      "ansible all -i /home/ubuntu/004_ansible/inventory -m ping"
-      
+      "sudo /tmp/script.sh"
     ]
-    depends_on       = [aws_instance.WebServer2, aws_instance.WebServer1]
   }
   
   connection {

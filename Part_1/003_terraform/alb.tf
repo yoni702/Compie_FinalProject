@@ -43,9 +43,15 @@ resource "aws_lb_target_group" "masterol-target-group" {
 }
  #---------------------------Target_group_attachment-----------------------------------
 
-resource "aws_lb_target_group_attachment" "TGA" {
+resource "aws_lb_target_group_attachment" "TGA1" {
   target_group_arn = aws_lb_target_group.masterol-target-group.arn
-  target_id        = [aws_instance.WebServer1.id, aws_instance.WebServer2.id]
+  target_id        = aws_instance.WebServer1.id
   port             = 80
-  depends_on       = [aws_instance.WebServer1, aws_instance.WebServer2]
+}
+
+
+resource "aws_lb_target_group_attachment" "TGA2" {
+  target_group_arn = aws_lb_target_group.masterol-target-group.arn
+  target_id        = aws_instance.WebServer2.id
+  port             = 80
 }
