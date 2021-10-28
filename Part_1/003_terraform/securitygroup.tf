@@ -20,7 +20,7 @@ resource "aws_security_group" "allow-ssh" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = [aws_security_group.allow-alb.id]
+    security_groups = ["${aws_security_group.allow-alb.id}"]
   }
   tags = {
     Name = "allow-ssh"
