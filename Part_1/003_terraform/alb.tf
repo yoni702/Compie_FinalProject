@@ -1,5 +1,5 @@
 resource "aws_lb" "albmasteroll" {
-  name               = "Masteroll"
+  name               = "albmasteroll"
   internal           = false
   load_balancer_type = "application"
   #Chech this line
@@ -22,28 +22,13 @@ resource "aws_lb" "albmasteroll" {
 
 # ---------------------------aws_lb_listener-----------------------------------
 resource "aws_lb_listener" "front_end" {
-  load_balancer_arn = aws_lb.front_end.arn
-  port              = "443"
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.front_end.arn
-  }
-}
-
-resource "aws_lb_listener" "front_end" {
-  load_balancer_arn = aws_lb.front_end.arn
+  load_balancer_arn = aws_lb.albmasteroll.arn
   port              = "80"
-  protocol          = "HTTPs"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
-
+  protocol          = "HTTP"
+  
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.front_end.arn
+    target_group_arn = aws_lb_target_group.masterol-target-group.arn
   }
 }
 
@@ -62,23 +47,8 @@ resource "aws_vpc" "masteroll" {
 
  #---------------------------Target_group_attachment-----------------------------------
 
-
 resource "aws_lb_target_group_attachment" "test" {
-  target_group_arn = aws_lb_target_group.test.arn
-  target_id        = aws_instance.test.id
+  target_group_arn = aws_lb_target_group.masterol-target-group.arn
+  target_id        = [aws_instance.WebServer1.id,aws_instance.WebServer2.id]
   port             = 80
 }
-
-resource "aws_lb_target_group" "test" {
-  # ... other configuration ...
-}
-
-resource "aws_instance" "test" {
-  # ... other configuration ...
-  #aws_instance.WebServer1
-  #aws_instance.WebServer2
-}
-
-
-
-
