@@ -55,3 +55,10 @@ resource "aws_lb_target_group_attachment" "TGA2" {
   target_id        = aws_instance.WebServer2.id
   port             = 80
 }
+
+
+
+#IP of aws instance retrieved
+output "Dns-Alb-masteroll" {
+  value = aws_lb.albmasteroll.dns_name
+}
