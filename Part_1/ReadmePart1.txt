@@ -29,16 +29,24 @@ https://github.com/yoni702/FinalProject.git
 001_Clone  the FinalProject GitHub
     git clone https://github.com/yoni702/FinalProject.git
 
-run:  Part1/001_bashscript/prerequisite.sh
+cd FinalProject/Part_1/001_bashscipts/
+
+run: 
+cd FinalProject/Part_1/001_bashscipts/
+. prerequisite.sh
+
     it will ask you if you want to :
         - Install terafform
         - Create a SSH-keygen on "002_mykey" folder
         - Initiate and apply terraform
         _ you will need to input my Access Key ID & Secret Access Key (there are on a txt file in the tar)
-        _ after the terfform finish you will be asked if you want to ssh to "Ansible-Controller" say yes 
+        _ after the terraform finish you will be asked if you want to ssh to "Ansible-Controller" say yes 
+
+the terraform output the DNS name of the ALB you should copy it to navigate in your browser
 
 
-002_ in "Ansible-Controller" you will find an ansible folder  you will need to run 
+002_ in "Ansible-Controller" instance you will find an ansible folder  you will need to run playbook
+    cd 004_ansible/
     ansible-playbook -i inventory WebInstance.yml
 
 you should be abble to see the website from the net now
