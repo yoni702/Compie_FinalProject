@@ -34,7 +34,7 @@ pipeline {
                     sh 'pwd'
                     sh 'ls'
                     sh 'terraform version'
-                    sh "ssh-keygen -b 2048 -t rsa -f ../002_mykey/mykey -q -N """
+                    sh 'ssh-keygen -b 2048 -t rsa -f ../002_mykey/mykey -q -N ""'
                     sh "terraform init"
                     sh "terraform apply"
                     
