@@ -69,7 +69,7 @@ pipeline {
             }
 
             steps {
-                dir("deploy/terraform") {
+                dir("003_terraform") {
                     sh 'pwd'
                     sh "terraform apply -input=false tfplan"
                 }
@@ -82,7 +82,7 @@ pipeline {
             }
 
             steps {
-                dir("deploy/terraform") {
+                dir("003_terraform") {
                     sh 'pwd'
                     sh "terraform destroy --auto-approve"
                 }
