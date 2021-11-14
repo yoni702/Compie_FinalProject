@@ -30,21 +30,19 @@ pipeline {
             }
 
             steps {
+                dir("Part_2/002_mykey") {
+                    sh 'rm mykey'
+                    sh 'ssh-keygen -b 2048 -t rsa -f mykey -q -N ""'
+                }
+                
                 dir("Part_2/003_terraform") {
                     sh 'pwd'
                     sh 'ls'
                     sh 'terraform version'
-                    def exists = fileExists '../002_mykey/mykey'
-                    if (exists) {
-                         echo 'Yes dont create one'
-                    } else {
-                        echo 'No'
-                        sh 'ssh-keygen -b 2048 -t rsa -f ../002_mykey/mykey -q -N ""'
-                    }
                     sh "terraform init -input=false"
                     sh "terraform apply -input=false"
-                    
                 }
+
             }
         }
 
