@@ -28,7 +28,7 @@ pipeline {
             }
 
             steps {
-                dir("deploy/terraform")
+                dir("003_terraform")
                         {
                             sh 'pwd'
                             sh 'printenv'
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 script {
                     sh 'pwd'
-                    def plan = readFile 'deploy/terraform/tfplan.txt'
+                    def plan = readFile '003_terraform/tfplan.txt'
                     input message: "Do you want to apply the plan?",
                             parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                 }
