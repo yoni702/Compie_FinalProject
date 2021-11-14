@@ -6,9 +6,6 @@ variable "region" {
 provider "aws" {
   region = var.region
 }
-provider "aws" {
-  access_key = var.AWS_ACCESS_KEY
-  secret_key = var.AWS_SECRET_KEY
 
 data "aws_availability_zones" "available" {}
 
