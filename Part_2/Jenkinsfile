@@ -18,7 +18,6 @@ pipeline {
         stage('checkout') {
             steps {
                 checkout scm
-                url: 'https://github.com/yoni702/FinalProject.git'
             }
         }
 
