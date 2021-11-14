@@ -1,0 +1,13 @@
+node {
+    def workspace =  env.WORKSPACE
+    def textpath = env.WORKSPACE + '/text-files'
+    def commit_id
+    //To be able to take the tag version
+    stage('Prepare') {
+        git 'https://github.com/yoni702/FinalProject.git'
+        sh "git rev-parse --short HEAD > .git/commit-id"
+        sh "echo '${textpath}'"
+        commit_id = readFile('.git/commit-id')
+    }
+    
+}
