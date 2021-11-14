@@ -14,15 +14,11 @@ pipeline {
     }
 
     stages {
-        stage('Prepare') {
-            git 'https://github.com/yoni702/FinalProject.git'
-            sh "git rev-parse --short HEAD > .git/commit-id"
-            sh "echo '${textpath}'"
-            commit_id = readFile('.git/commit-id')
-    }
+
         stage('checkout') {
             steps {
                 checkout scm
+                url: 'https://github.com/yoni702/FinalProject.git'
             }
         }
 
