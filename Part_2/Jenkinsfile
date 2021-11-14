@@ -27,7 +27,7 @@ pipeline {
             }
 
             steps {
-                dir("003_terraform") {
+                dir("Part_2/003_terraform") {
                     sh 'pwd'
                     sh 'ls'
                     sh "terraform init"
@@ -42,7 +42,7 @@ pipeline {
             }
 
             steps {
-                dir("003_terraform") {
+                dir("Part_2/003_terraform") {
                     sh 'pwd'
                     sh "terraform destroy"
                 }
