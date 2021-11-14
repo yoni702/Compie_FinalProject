@@ -35,7 +35,7 @@ pipeline {
                     sh 'ssh-keygen -b 2048 -t rsa -f mykey -q -N ""'
                 }
                 
-                dir("Part_2/003_terraform") {
+                dir("Part_2/004_terraform") {
                     sh 'pwd'
                     sh 'ls'
                     sh 'terraform version'
@@ -52,7 +52,7 @@ pipeline {
             }
 
             steps {
-                dir("Part_2/003_terraform") {
+                dir("Part_2/004_terraform") {
                     sh 'pwd'
                     sh "terraform destroy --auto-approve"
                 }
