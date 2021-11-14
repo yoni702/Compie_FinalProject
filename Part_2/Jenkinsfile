@@ -29,8 +29,8 @@ pipeline {
             steps {
                 dir("003_terraform") {
                     sh 'pwd'
-                    sh 'terraform init'
-                    sh 'terraform apply'
+                    sh "terraform init"
+                    sh "terraform apply"
                 }
             }
         }
