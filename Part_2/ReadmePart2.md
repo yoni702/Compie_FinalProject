@@ -5,7 +5,8 @@ it will be populate by a web application using Kubernetes and Docker.
 ##### Table of Contents
  * [List of Tools & Technologies](#Technologies)
  * [Git Repository](#Git)
- * [Step Zero: Prerequisites on your Workstation](#step-zero)
+ * [Prerequisites on your Workstation](#Prerequisites)
+ * [Jenkins on your Workstation](#Jenkins)
 
  ### Git Repository <a id="Git"></a>
     https://github.com/yoni702/FinalProject.git
@@ -18,7 +19,8 @@ it will be populate by a web application using Kubernetes and Docker.
     - EKS
 
 
- ### Step Zero: Prerequisites on your Workstation <a id="step-zero"></a>
+ ### Prerequisites on your Workstation <a id="Prerequisites"></a> 
+ if needeed you  will find a folder with all bashscripts instalation you dont have on your workstation (Assuming your are under Ubuntu) 
     - InstallAWS.sh 
     - InstallTerraform.sh
     - github.sh
@@ -26,7 +28,7 @@ it will be populate by a web application using Kubernetes and Docker.
     - InstallEksctl.sh
 
 
-### Jenkins on your Workstation
+### Jenkins on your Workstation <a id="Jenkins"></a>
 sudo docker pull jenkins/jenkins
 sudo docker run -p 11011:8080 --name=jenkins-master jenkins/jenkins
 #### install plugins:
@@ -39,7 +41,9 @@ sudo docker run -p 11011:8080 --name=jenkins-master jenkins/jenkins
 
 
 ### Connect to Cluster via eksctl
+```
 aws eks --region <region-code> update-kubeconfig --name <cluster_name>
+```
 
 
 ### Dashboard
