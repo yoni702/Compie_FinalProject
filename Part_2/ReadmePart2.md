@@ -22,22 +22,38 @@ it will be populate by a web application using Kubernetes and Docker.
  ### Prerequisites on your Workstation <a id="Prerequisites"></a> 
  if needeed you  will find a folder with all bashscripts instalation you dont have on your workstation (Assuming your are under Ubuntu) 
     - InstallAWS.sh 
+    - InstallDocker.sh
     - InstallTerraform.sh
     - github.sh
-    - InstallDocker.sh
     - InstallEksctl.sh
 
 
 ### Jenkins on your Workstation <a id="Jenkins"></a>
-sudo docker pull jenkins/jenkins
-sudo docker run -p 11011:8080 --name=jenkins-master jenkins/jenkins
+    apt  install docker-compose
+    curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-jenkins/master/docker-compose.yml > docker-compose.yml
+    docker-compose up -d
+     - Port: 80
+     - Username: user
+     - Password: bitnami
+    
+    #docker pull bitnami/jenkins:latest
+    #sudo docker pull jenkins/jenkins
+    #sudo docker run -d -p 11011:8080 --name=jenkins-master jenkins/jenkins
+
 #### install plugins:
     - terraform
+    name it "terraform_plugin" in "Global Tool Configuration" 
 
 #### Create Credentials:
     - aws
 
 #### Create Pipeline:
+ pipeline section:
+    - Pipeline script from SCM
+    - SCM =  Git
+    - Repository URL: https://github.com/yoni702/FinalProject.git
+    - Script Path: Part_2/Jenkinsfile
+
 
 
 ### Connect to Cluster via eksctl
