@@ -29,13 +29,13 @@ it will be populate by a web application using Kubernetes and Docker.
 
 
  ### Step Zero: Prerequisites <a id="step-zero"></a>
-InstallAWS.sh
-InstallTerraform.sh
-github.sh
-InstallDocker.sh 
-InstallEksctl.sh
+  * **InstallAWS.sh:**
+  * **InstallTerraform.sh:**
+  * **github.sh:**
+  * **InstallDocker.sh:**
+  * **InstallEksctl.sh:**
 
-    ```console
-        1
-    ...
+
+    ```
+
     ```
