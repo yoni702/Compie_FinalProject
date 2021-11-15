@@ -44,8 +44,17 @@ it will be populate by a web application using Kubernetes and Docker.
     - terraform
     name it "terraform_plugin" in "Global Tool Configuration" 
 
-#### Create Credentials:
-    - aws
+#### Create TWO AWS Credentials:
+
+    - Kind: Secret text
+        - Secret: <Your Access Key Id>
+        - ID: AWS_ACCESS_KEY_ID
+    
+    - Kind: Secret text
+        - Secret: <Your Access Key Id>
+        - ID: AWS_SECRET_ACCESS_KEY
+    
+   
 
 #### Create Pipeline:
  pipeline section:
@@ -53,9 +62,17 @@ it will be populate by a web application using Kubernetes and Docker.
     - SCM =  Git
     - Repository URL: https://github.com/yoni702/FinalProject.git
     - Script Path: Part_2/Jenkinsfile
+    ----------------------------------------------------------
+    tools {
+        terraform 'terraform_plugin'
+    }
 
+                dir("Part_2/002_mykey") {
+                    sh 'rm mykey'
+                    sh 'ssh-keygen -b 2048 -t rsa -f mykey -q -N ""'
+                }
 
-
+    ----------------------------------------------------------
 ### Connect to Cluster via eksctl
 ```
 aws eks --region <region-code> update-kubeconfig --name <cluster_name>
