@@ -23,7 +23,6 @@ it will be populate by a web application using Kubernetes and Docker.
  if needeed you  will find a folder with all bashscripts instalation you dont have on your workstation (Assuming your are under Ubuntu) 
     - InstallAWS.sh 
     - InstallDocker.sh
-    - InstallTerraform.sh
     - github.sh
     - InstallEksctl.sh
 
@@ -41,8 +40,13 @@ it will be populate by a web application using Kubernetes and Docker.
     #sudo docker run -d -p 11011:8080 --name=jenkins-master jenkins/jenkins
 
 #### install plugins:
-    - terraform
-    name it "terraform_plugin" in "Global Tool Configuration" 
+    >> Manage Jenkins >>Manage Plugins >>Available
+        - terraform
+    >> Manage Jenkins >>Global Tool Configuration >>Add Terraform
+        - Name: terraform_plugin
+
+
+    
 
 #### Create TWO AWS Credentials:
 
@@ -63,10 +67,6 @@ it will be populate by a web application using Kubernetes and Docker.
     - Repository URL: https://github.com/yoni702/FinalProject.git
     - Script Path: Part_2/Jenkinsfile
     ----------------------------------------------------------
-    tools {
-        terraform 'terraform_plugin'
-    }
-
                 dir("Part_2/002_mykey") {
                     sh 'rm mykey'
                     sh 'ssh-keygen -b 2048 -t rsa -f mykey -q -N ""'
