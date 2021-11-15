@@ -19,14 +19,31 @@ it will be populate by a web application using Kubernetes and Docker.
 
 
  ### Step Zero: Prerequisites on your Workstation <a id="step-zero"></a>
- 
-  - InstallAWS.sh
-  - InstallTerraform.sh
-  - github.sh
-  - InstallDocker.sh
-  - InstallEksctl.sh
+    - InstallAWS.sh 
+    - InstallTerraform.sh
+    - github.sh
+    - InstallDocker.sh
+    - InstallEksctl.sh
+
+### Connect to Cluster via eksctl
+    ```
+    export DASHBOARD_VERSION="v2.0.0"
+
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/${DASHBOARD_VERSION}/aio/deploy/recommended.yaml
 
 
+    http://127.0.0.1:8081/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/persistentvolume?namespace=default
+
+aws eks get-token --cluster-name yoni-eks-hnOh7i8m
+    
     ```
 
+### Deploy
+    ```
+    kubectl create -f redis-master-controller.json
+    kubectl create -f redis-master-service.json
+    kubectl create -f redis-slave-controller.json
+    kubectl create -f redis-slave-service.json
+    kubectl create -f guestbook-controller.json
+    kubectl create -f guestbook-service.json
     ```
