@@ -30,12 +30,12 @@ it will be populate by a web application using Kubernetes and Docker.
     export DASHBOARD_VERSION="v2.0.0"
 
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/${DASHBOARD_VERSION}/aio/deploy/recommended.yaml
-
-
+    ```
+    ```
     http://127.0.0.1:8081/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/persistentvolume?namespace=default
-
-aws eks get-token --cluster-name yoni-eks-hnOh7i8m
-    
+    ```
+    ```
+    aws eks get-token --cluster-name yoni-eks-hnOh7i8m
     ```
 
 ### Deploy
