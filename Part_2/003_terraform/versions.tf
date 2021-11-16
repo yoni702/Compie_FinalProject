@@ -1,10 +1,10 @@
 terraform {
   #Creates S3 backend
   backend "s3" {
-    bucket         = "terraform-state"
-    key            = "s3/terraform.tfstate"
-    region         = var.region
-    }
+    bucket = "tfstate"
+    key = "app-state"
+    region = "us-east-1"
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
