@@ -1,10 +1,13 @@
-
+provider "aws" {
+  region = "us-east-2"
+}
 
 #1 -this will create a S3 bucket in AWS
 resource "aws_s3_bucket" "terraform_state" {
   bucket = "terraform-state"
-  region         = var.region
+  region         = "us-east-2"
   force_destroy = true
+  
   lifecycle {
     prevent_destroy = true
   }
@@ -20,6 +23,18 @@ server_side_encryption_configuration {
         sse_algorithm = "AES256"
       }
     }
+  }
+}
+
+resource "aws_dynamodb_table" "terraform_state_lock" {
+  name           = "app-state"
+  read_capacity  = 1
+  write_capacity = 1
+  hash_key       = "LockID"
+
+  attribute {
+    name = "LockID"
+    type = "S"
   }
 }
 

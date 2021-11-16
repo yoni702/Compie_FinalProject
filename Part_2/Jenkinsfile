@@ -7,6 +7,7 @@ pipeline {
 
     parameters {
         string(name: 'environment', defaultValue: 'terraform', description: 'Workspace/environment file to use for deployment')
+        booleanParam(name: 'S3', defaultValue: false, description: 'Create-S3 for tfState')
         booleanParam(name: 'destroy', defaultValue: false, description: 'Destroy Terraform build?')
     }
     
@@ -22,6 +23,21 @@ pipeline {
                 checkout scm
             }
         }
+        
+        stage('S3') {
+            when {
+                equals expected: true, actual: params.S3
+            }
+
+            steps {
+                dir("Part_2/003_RemoteState") {
+                    sh 'pwd'
+                    sh 'ls'
+                    sh "terraform init -input=false"
+                    sh "terraform apply --auto-approve -input=false"
+                }
+            }
+        }
 
         stage('Apply') {
             when {
@@ -30,15 +46,12 @@ pipeline {
                 }
             }
 
-            steps {
-                
                 dir("Part_2/003_terraform") {
                     sh 'pwd'
                     sh 'ls'
                     sh "terraform init -input=false"
                     sh "terraform apply --auto-approve -input=false"
                 }
-
             }
         }
 
