@@ -53,8 +53,8 @@ pipeline {
                     sh "terraform init -input=false -reconfigure "
                     sh "terraform apply --auto-approve -input=false"
                     sh "echo 'blaaaaaaaaaaaaaa'"
-                    sh "terraform show -json terraform.tfstate | jq '.values.root_module.resources[]"
-                    sh "awk '/value": "apiVersion/ {print}' app-state"
+                    sh "terraform show -json terraform.tfstate | jq '.outputs.kubectl_config.value[]"
+                    
                 }
 
             }
