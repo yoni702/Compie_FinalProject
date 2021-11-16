@@ -17,6 +17,7 @@ it will be populate by a web application using Kubernetes and Docker.
     - Ansible
     - Docker
     - EKS
+    
 
 
  ### Prerequisites on your Workstation <a id="Prerequisites"></a> 
@@ -25,6 +26,7 @@ it will be populate by a web application using Kubernetes and Docker.
     - InstallDocker.sh
     - github.sh
     - InstallEksctl.sh
+    - snap install kubectl --classic
 
 
 ### Jenkins on your Workstation <a id="Jenkins"></a>
@@ -40,13 +42,18 @@ it will be populate by a web application using Kubernetes and Docker.
     #sudo docker run -d -p 11011:8080 --name=jenkins-master jenkins/jenkins
 
 #### install plugins:
+    ##### Terraform:
     >> Manage Jenkins >>Manage Plugins >>Available
         - terraform
     >> Manage Jenkins >>Global Tool Configuration >>Add Terraform
         - Name: terraform_plugin
-
-
-    
+        Tip:the installer version may be the same of the terraform version installed on the Workstation to be sure it will work
+    ##### Kubernetes:
+     >> Manage Jenkins >>Manage Plugins >>Available
+        - Kubernetes Continuous Deploy Plugin
+    ##### Docker:
+    -Docker
+    -Docker pipeline
 
 #### Create TWO AWS Credentials:
 
@@ -55,7 +62,7 @@ it will be populate by a web application using Kubernetes and Docker.
         - ID: AWS_ACCESS_KEY_ID
     
     - Kind: Secret text
-        - Secret: <Your Access Key Id>
+        - Secret: <Your Secret Access Key>
         - ID: AWS_SECRET_ACCESS_KEY
     
    
@@ -66,17 +73,23 @@ it will be populate by a web application using Kubernetes and Docker.
     - SCM =  Git
     - Repository URL: https://github.com/yoni702/FinalProject.git
     - Script Path: Part_2/Jenkinsfile
-    ----------------------------------------------------------
-                dir("Part_2/002_mykey") {
-                    sh 'rm mykey'
-                    sh 'ssh-keygen -b 2048 -t rsa -f mykey -q -N ""'
-                }
 
-    ----------------------------------------------------------
 ### Connect to Cluster via eksctl
 ```
-aws eks --region <region-code> update-kubeconfig --name <cluster_name>
+aws configure
+    AWS Access Key ID [None]: <Your Access Key Id>
+    AWS Secret Access Key [None]: <Your Secret Access Key>
+    Default region name [None]: us-east-2
+    Default output format [None]: json
 ```
+
+```
+aws eks --region <region-code> update-kubeconfig --name <cluster_name>
+aws eks --region us-east-2 update-kubeconfig --name yoni-eks
+```
+Tip: This variables are outputed to the Jenkins console
+    --region: us-east-2 
+    --name: yoni-eks
 
 
 ### Dashboard
@@ -87,11 +100,17 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/${DASHBO
 ```
 
 ```
-http://127.0.0.1:8081/api/v1/namespaces/kubernetes-dashboard/services https:kubernetes-dashboard:/proxy/#/persistentvolume?namespace=default
+kubectl proxy --port=8081 --address=0.0.0.0 --disable-filter=true &
+
+```
+-In your browser
+```
+http://127.0.0.1:8081/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
 ```
 
 ```
-aws eks get-token --cluster-name yoni-eks-hnOh7i8m
+aws eks get-token --cluster-name yoni-eks | jq -r '.status.token'
 ```
 
 

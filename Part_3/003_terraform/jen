@@ -1,0 +1,4 @@
+               dir("Part_2/002_mykey") {
+                    sh 'rm mykey'
+                    sh 'ssh-keygen -b 2048 -t rsa -f mykey -q -N ""'
+                }

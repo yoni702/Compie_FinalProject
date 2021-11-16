@@ -10,7 +10,7 @@ provider "aws" {
 data "aws_availability_zones" "available" {}
 
 locals {
-  cluster_name = "yoni-eks-${random_string.suffix.result}"
+  cluster_name = "yoni-eks"
 }
 
 resource "random_string" "suffix" {
@@ -30,7 +30,7 @@ module "vpc" {
   enable_nat_gateway   = true
   single_nat_gateway   = true
   enable_dns_hostnames = true
-
+s
   tags = {
     "kubernetes.io/cluster/${local.cluster_name}" = "shared"
   }
