@@ -54,7 +54,7 @@ pipeline {
                     sh "terraform apply --auto-approve -input=false"
                     sh "echo 'blaaaaaaaaaaaaaa'"
                     sh "terraform show -json terraform.tfstate | jq '.outputs.kubectl_config.value[]"
-                    
+                    sh "aws eks --region us-east-2 update-kubeconfig --name yoni-eks"
                 }
 
             }
