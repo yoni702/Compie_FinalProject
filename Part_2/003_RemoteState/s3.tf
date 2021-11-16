@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "terraform_state_yoni" {
-  bucket = "tfstate_yoni"
+  bucket = "tfstateyoni"
 
   versioning {
     enabled = true
