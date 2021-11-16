@@ -2,8 +2,8 @@ provider "aws" {
   region = "us-east-2"
 }
 
-resource "aws_s3_bucket" "terraform_state" {
-  bucket = "tfstate"
+resource "aws_s3_bucket" "terraform_state_yoni" {
+  bucket = "tfstate_yoni"
 
   versioning {
     enabled = true
