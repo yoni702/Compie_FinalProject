@@ -84,12 +84,13 @@ aws configure
 ```
 
 ```
-aws eks --region <region-code> update-kubeconfig --name <cluster_name>
 aws eks --region us-east-2 update-kubeconfig --name yoni-eks
 ```
-Tip: This variables are outputed to the Jenkins console
-    --region: us-east-2 
-    --name: yoni-eks
+
+### Connect Cluster to Jenkins
+```
+sudo cat ~/.kube/config
+```
 
 
 ### Dashboard
