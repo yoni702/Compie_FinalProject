@@ -23,14 +23,8 @@ server_side_encryption_configuration {
   }
 }
 
-#Creates S3 backend
-terraform {
-  backend "s3" {
-    bucket         = "terraform-state"
-    key            = "s3/terraform.tfstate"
-    region         = var.region
-    }
-}
+
+
 
 
 
