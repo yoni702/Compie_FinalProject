@@ -59,11 +59,6 @@ pipeline {
             when {
                 equals expected: true, actual: params.terraform
             }
-            when {
-                not {
-                    equals expected: true, actual: params.destroy
-                }
-            }
             steps {
                 dir("Part_2/003_terraform") {
                     sh 'pwd'
