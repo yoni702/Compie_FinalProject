@@ -3,7 +3,7 @@ pipeline {
     
     tools {
         terraform 'terraform_plugin'
-        DockerTool'docky'
+        DockerTool 'docky'
     }
     //options {
         // This is required if you want to clean before build
