@@ -18,7 +18,7 @@ output "kubectl_config" {
   value       = module.eks.kubeconfig
 }
 resource "local_file" "kubectl_config" {
-    content  = module.eks.kubeconfig
+    content  = "${module.eks.kubeconfig}"
     filename = "kubectl_config"
 }
 
@@ -27,7 +27,7 @@ output "config_map_aws_auth" {
   value       = module.eks.config_map_aws_auth
 }
 resource "local_file" "config_map_aws_auth" {
-    content  = module.eks.config_map_aws_auth
+    content  = "${module.eks.config_map_aws_auth}" 
     filename = "config_map_aws_auth"
 }
 output "region" {
