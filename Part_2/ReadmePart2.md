@@ -33,7 +33,7 @@ it will be populate by a web application using Kubernetes and Docker.
     apt  install docker-compose
     curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-jenkins/master/docker-compose.yml > docker-compose.yml
     docker-compose up -d
-     - Port: 80
+     - Port: 8080
      - Username: user
      - Password: bitnami
     
@@ -52,8 +52,8 @@ it will be populate by a web application using Kubernetes and Docker.
      >> Manage Jenkins >>Manage Plugins >>Available
         - Kubernetes Continuous Deploy Plugin
     ##### Docker:
-    -Docker
-    -Docker pipeline
+    -CloudBees Docker Build and Publish
+    -Amazon ECR
 
 #### Create TWO AWS Credentials:
 
