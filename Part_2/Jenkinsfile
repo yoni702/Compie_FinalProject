@@ -4,10 +4,10 @@ pipeline {
     tools {
         terraform 'terraform_plugin'
     }
-    options {
+    //options {
         // This is required if you want to clean before build
         //skipDefaultCheckout(true)
-    }
+    //}
     parameters {
         string(name: 'environment', defaultValue: 'terraform', description: 'Workspace/environment file to use for deployment')
         booleanParam(name: 'S3', defaultValue: false, description: 'Terraform Create-S3 for tfState')
