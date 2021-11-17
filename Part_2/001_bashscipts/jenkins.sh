@@ -17,3 +17,13 @@ java -version
 sudo systemctl daemon-reload
 sudo systemctl start jenkins
 sudo systemctl status jenkins
+
+#Give to jenkins permissions
+# user is added to the docker group. This will impact the security of your system; the docker group is root equivalent
+sudo groupadd docker
+sudo usermod -aG docker jenkins
+
+# sudo nano  /etc/sudoers
+# jenkins    ALL=(ALL:ALL) ALL
+# %docker   ALL=(ALL:ALL) ALL
+# Restart Jenkins
