@@ -65,7 +65,7 @@ pipeline {
             }
             steps {
                 dir("Part_2/guestbook-go") {
-                    withKubeConfig([credentialsId: 'eks_yoni-eks', serverUrl: 'https://3F2993457953F098BD922D58D7D0A6D4.gr7.us-east-2.eks.amazonaws.com']) {
+                    withKubeConfig([credentialsId: 'yoni-eks', serverUrl: 'https://3F2993457953F098BD922D58D7D0A6D4.gr7.us-east-2.eks.amazonaws.com']) {
                         sh 'kubectl create -f redis-master-controller.json'
                         sh 'kubectl create -f redis-master-service.json'
                         sh 'kubectl create -f redis-slave-controller.json'
