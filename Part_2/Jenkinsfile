@@ -4,7 +4,10 @@ pipeline {
     tools {
         terraform 'terraform_plugin'
     }
-
+    options {
+        // This is required if you want to clean before build
+        skipDefaultCheckout(true)
+    }
     parameters {
         string(name: 'environment', defaultValue: 'terraform', description: 'Workspace/environment file to use for deployment')
         booleanParam(name: 'docker', defaultValue: false, description: 'Docker Build & Push to Ecr')
@@ -29,6 +32,9 @@ pipeline {
 
         stage('checkout') {
             steps {
+                // Clean before build
+                cleanWs()
+                // We need to explicitly checkout from SCM here
                 checkout scm
             }
         }
