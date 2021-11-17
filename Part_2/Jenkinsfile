@@ -52,8 +52,26 @@ pipeline {
                     sh 'ls'
                     sh "terraform init -input=false -reconfigure "
                     sh "terraform apply --auto-approve -input=false"
-                    sh "echo 'blaaaaaaaaaaaaaa'"
-                    sh "aws eks --region us-east-2 update-kubeconfig --name yoni-eks"
+                }
+
+            }
+        }
+        
+        stage('Deploy') {
+            when {
+                not {
+                    equals expected: true, actual: params.destroy
+                }
+            }
+            steps {
+                dir("Part_2/guestbook-go") {
+                    sh 'kubectl create -f redis-master-controller.json'
+                    sh 'kubectl create -f redis-master-service.json'
+                    sh 'kubectl create -f redis-slave-controller.json'
+                    sh 'kubectl create -f redis-slave-service.json'
+                    sh 'kubectl create -f guestbook-controller.json'
+                    sh 'kubectl create -f guestbook-service.json'
+
                 }
 
             }

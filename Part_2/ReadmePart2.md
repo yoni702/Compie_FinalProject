@@ -89,6 +89,9 @@ aws eks --region us-east-2 update-kubeconfig --name yoni-eks
 
 ### Connect Cluster to Jenkins
 ```
+awk '/value": "apiVersion/ {print}' app-state > newlj.txt
+cat newlj.txt | sed 's/\\n/\n/g' > output_file.txt
+
 sudo cat ~/.kube/config
 ```
 

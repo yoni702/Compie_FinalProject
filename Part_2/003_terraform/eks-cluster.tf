@@ -2,7 +2,7 @@ module "eks" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = local.cluster_name
   cluster_version = "1.21"
-  subnets         = module.vpc.private_subnets
+  subnets         = [module.vpc.private_subnets[0], module.vpc.private_subnets[1]]
 
   tags = {
     Environment = "yoni"
