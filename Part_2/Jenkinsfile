@@ -78,10 +78,7 @@ pipeline {
             steps {
                 script {
                 sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
-                sh "aws eks --region us-east-2 update-kubeconfig --name yoni-eks"
-                sh "kubectl get all"
-                }
-                 
+                }   
             }
         }
 
@@ -116,16 +113,15 @@ pipeline {
             }
             steps {
                 dir("Part_2/guestbook-go") {
-                    withKubeConfig([credentialsId: 'yoni-eks', serverUrl: 'https://3F2993457953F098BD922D58D7D0A6D4.gr7.us-east-2.eks.amazonaws.com']) {
-                        sh 'kubectl create -f redis-master-controller.json'
-                        sh 'kubectl create -f redis-master-service.json'
-                        sh 'kubectl create -f redis-slave-controller.json'
-                        sh 'kubectl create -f redis-slave-service.json'
-                        sh 'kubectl create -f guestbook-controller.json'
-                        sh 'kubectl create -f guestbook-service.json'
-                    }
+                    sh "aws eks --region us-east-2 update-kubeconfig --name yoni-eks"
+                    sh "kubectl get all"
+                    sh 'kubectl create -f redis-master-controller.json'
+                    sh 'kubectl create -f redis-master-service.json'
+                    sh 'kubectl create -f redis-slave-controller.json'
+                    sh 'kubectl create -f redis-slave-service.json'
+                    sh 'kubectl create -f guestbook-controller.json'
+                    sh 'kubectl create -f guestbook-service.json'
                 }
-
             }
         }
 
