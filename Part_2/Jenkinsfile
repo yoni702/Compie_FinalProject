@@ -7,13 +7,21 @@ pipeline {
 
     parameters {
         string(name: 'environment', defaultValue: 'terraform', description: 'Workspace/environment file to use for deployment')
-        booleanParam(name: 'S3', defaultValue: false, description: 'Create-S3 for tfState')
+        booleanParam(name: 'docker', defaultValue: false, description: 'Docker Build & Push to Ecr')
+        booleanParam(name: 'S3', defaultValue: false, description: 'Terraform Create-S3 for tfState')
+        booleanParam(name: 'terraform', defaultValue: false, description: 'Terraform build Infrastucture')
+        booleanParam(name: 'deploy', defaultValue: false, description: 'Create-S3 for tfState')
         booleanParam(name: 'destroy', defaultValue: false, description: 'Destroy Terraform build?')
     }
     
     environment {
+        AWS_ACCOUNT_ID="227029025754"
+        AWS_DEFAULT_REGION="us-east-2" 
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        IMAGE_REPO_NAME="yoni_ecr"
+        IMAGE_TAG="IMAGE_TAG"
+        REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
 
     }
 
@@ -24,7 +32,8 @@ pipeline {
                 checkout scm
             }
         }
-        
+
+            
         stage('S3') {
             when {
                 equals expected: true, actual: params.S3
@@ -42,6 +51,9 @@ pipeline {
 
         stage('Apply') {
             when {
+                equals expected: true, actual: params.terraform
+            }
+            when {
                 not {
                     equals expected: true, actual: params.destroy
                 }
@@ -57,7 +69,47 @@ pipeline {
             }
         }
         
+        stage('Logging into AWS ECR') {
+            when {
+                equals expected: true, actual: params.docker
+            }
+            steps {
+                script {
+                sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+                }
+                 
+            }
+        }
+
+        // Building Docker images
+        stage('Building image') {
+            when {
+                equals expected: true, actual: params.docker
+            }
+            steps{
+                script {
+                    dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+                }
+            }
+        }
+   
+        // Uploading Docker images into AWS ECR
+        stage('Pushing to ECR') {
+            when {
+                equals expected: true, actual: params.docker
+            }
+            steps{  
+                script {
+                    sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"
+                    sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+                }
+            }
+        }
+
         stage('Deploy') {
+            when {
+                equals expected: true, actual: params.deploy
+            }
             when {
                 not {
                     equals expected: true, actual: params.destroy

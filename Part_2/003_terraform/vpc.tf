@@ -18,6 +18,15 @@ resource "random_string" "suffix" {
   special = false
 }
 
+resource "aws_ecr_repository" "my_ecr" {
+  name                 = "yoni_ecr"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+}
+
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.2.0"
