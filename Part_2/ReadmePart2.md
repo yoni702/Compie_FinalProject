@@ -3,24 +3,35 @@ This Pipeline shows how to build a EKS Cluster within VPC on East-2
 it will be populate by a web application using Kubernetes and Docker. 
 
 #### Table of Contents
- * [List of Tools & Technologies](#Technologies)
+ * [000_Video Link](#Video)
  * [Git Repository](#Git)
+ * [List of Tools & Technologies](#Technologies)
  * [Prerequisites on your Workstation](#Prerequisites)
  * [Jenkins on your Workstation](#Jenkins)
  * [If you want to check via eksctl, Dashboard](#check)
+
+
+ ## Video <a id="Video"></a>
+    https://github.com/yoni702/FinalProject.git
 
  ## Git Repository <a id="Git"></a>
     https://github.com/yoni702/FinalProject.git
 
 
  ## List of Tools & Technologies <a id="Technologies"></a>
+  ### Part-2
     - Jenkins
     - Terraform
-    - EKS,S3,DynamoDB,ECR,
-    _ ECR
-    _ Docker
-    
+    - VPC
+    - EKS (with ASG worker nodes )
+    - S3 (For Remote TfState)
+    - DynamoDB (For Lock TfState)
 
+  ### Part-3
+    - guestbook-go (App to deploy)
+    - Docker
+    - ECR
+    
 
  ## Prerequisites on your Workstation <a id="Prerequisites"></a> 
  if needeed you  will find a folder with all bashscripts instalations you dont have on your workstation (Assuming your are under Ubuntu) 
