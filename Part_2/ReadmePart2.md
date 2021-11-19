@@ -34,7 +34,7 @@ it will be populate by a web application using Kubernetes and Docker.
     
 
  ## Prerequisites on your Workstation <a id="Prerequisites"></a> 
- if needeed you  will find a folder with all bashscripts instalations you dont have on your workstation (Assuming your are under Ubuntu) 
+ if needed you  will find a folder with all bashscripts instalations you dont have on your workstation (Assuming your are under Ubuntu) 
 
 - InstallAWS.sh
 - InstallDocker.sh
@@ -85,6 +85,8 @@ sudo systemctl status jenkins
    
 
 ### Create Pipeline:
+Tip: It's better not running Jenkins from a Docker images ,if so you'll need to add jenkins Plugins (Terraform ,Docker, AWS ...) to be able to run the Pipeline (And adding into the jenkinsfile tool{} section with installed plugins ) 
+
 ```
  pipeline section:
     - Pipeline script from SCM
