@@ -57,11 +57,13 @@ it will be populate by a web application using Kubernetes and Docker.
    
 
 #### Create Pipeline:
+'''
  pipeline section:
     - Pipeline script from SCM
     - SCM =  Git
     - Repository URL: https://github.com/yoni702/FinalProject.git
     - Script Path: Part_2/Jenkinsfile
+'''
 
 ### If you want to Connect to the Cluster via eksctl
 
@@ -76,16 +78,19 @@ export DASHBOARD_VERSION="v2.0.0"
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/${DASHBOARD_VERSION}/aio/deploy/recommended.yaml
 ```
 
+#### Copy the token of the Cluster
+
+```
+aws eks get-token --cluster-name yoni-eks | jq -r '.status.token'
+```
+
 ```
 kubectl proxy --port=8081 --address=0.0.0.0 --disable-filter=true &
 
 ```
--In your browser
+
+#### In your browser
+
 ```
 http://127.0.0.1:8081/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
-
-```
-
-```
-aws eks get-token --cluster-name yoni-eks | jq -r '.status.token'
 ```
