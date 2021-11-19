@@ -22,12 +22,14 @@ it will be populate by a web application using Kubernetes and Docker.
 
  ### Prerequisites on your Workstation <a id="Prerequisites"></a> 
  if needeed you  will find a folder with all bashscripts instalation you dont have on your workstation (Assuming your are under Ubuntu) 
-    - InstallAWS.sh 
-    - InstallDocker.sh
-    - github.sh
-    - InstallEksctl.sh
-    - snap install kubectl --classic
-
+'''
+- InstallAWS.sh 
+- InstallDocker.sh
+- github.sh
+- InstallEksctl.sh
+- Install-jenkins.sh
+- snap install kubectl --classic
+'''
 
 ### Jenkins on your Workstation <a id="Jenkins"></a>
     apt  install docker-compose
@@ -41,19 +43,6 @@ it will be populate by a web application using Kubernetes and Docker.
     #sudo docker pull jenkins/jenkins
     #sudo docker run -d -p 11011:8080 --name=jenkins-master jenkins/jenkins
 
-#### install plugins:
-    ##### Terraform:
-    >> Manage Jenkins >>Manage Plugins >>Available
-        - terraform
-    >> Manage Jenkins >>Global Tool Configuration >>Add Terraform
-        - Name: terraform_plugin
-        Tip:the installer version may be the same of the terraform version installed on the Workstation to be sure it will work
-    ##### Kubernetes:
-     >> Manage Jenkins >>Manage Plugins >>Available
-        - Kubernetes Continuous Deploy Plugin
-    ##### Docker:
-    -CloudBees Docker Build and Publish
-    -Amazon ECR
 
 #### Create TWO AWS Credentials:
 
@@ -74,29 +63,13 @@ it will be populate by a web application using Kubernetes and Docker.
     - Repository URL: https://github.com/yoni702/FinalProject.git
     - Script Path: Part_2/Jenkinsfile
 
-### Connect to Cluster via eksctl
-```
-aws configure
-    AWS Access Key ID [None]: <Your Access Key Id>
-    AWS Secret Access Key [None]: <Your Secret Access Key>
-    Default region name [None]: us-east-2
-    Default output format [None]: json
-```
+### If you want to Connect to the Cluster via eksctl
 
 ```
 aws eks --region us-east-2 update-kubeconfig --name yoni-eks
 ```
 
-### Connect Cluster to Jenkins
-```
-awk '/value": "apiVersion/ {print}' app-state > newlj.txt
-cat newlj.txt | sed 's/\\n/\n/g' > output_file.txt
-
-sudo cat ~/.kube/config
-```
-
-
-### Dashboard
+### If You want to check via the Dashboard
 ```
 export DASHBOARD_VERSION="v2.0.0"
 
@@ -116,27 +89,3 @@ http://127.0.0.1:8081/api/v1/namespaces/kubernetes-dashboard/services/https:kube
 ```
 aws eks get-token --cluster-name yoni-eks | jq -r '.status.token'
 ```
-
-
-### Deploy
-```
-kubectl create -f redis-master-controller.json
-kubectl create -f redis-master-service.json
-kubectl create -f redis-slave-controller.json
-kubectl create -f redis-slave-service.json
-kubectl create -f guestbook-controller.json
-kubectl create -f guestbook-service.json
-```
-
-
-
-
-                withCredentials([usernamePassword(credentialsId: 'kubeconfig', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    // available as an env variable, but will be masked if you try to print it out any which way
-                    // note: single quotes prevent Groovy interpolation; expansion is by Bourne Shell, which is what you want
-                    sh 'echo $PASSWORD'
-                    // also available as a Groovy variable
-                    echo USERNAME
-                    // or inside double quotes for string interpolation
-                    echo "username is $USERNAME"
-                }
