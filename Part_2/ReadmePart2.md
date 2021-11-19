@@ -7,29 +7,29 @@ it will be populate by a web application using Kubernetes and Docker.
  * [Git Repository](#Git)
  * [Prerequisites on your Workstation](#Prerequisites)
  * [Jenkins on your Workstation](#Jenkins)
- * [If you want to check via eksctl,Dashboard](#check)
+ * [If you want to check via eksctl, Dashboard](#check)
 
  ## Git Repository <a id="Git"></a>
     https://github.com/yoni702/FinalProject.git
 
 
  ## List of Tools & Technologies <a id="Technologies"></a>
+    - Jenkins
     - Terraform
-    - Ansible
-    - Docker
-    - EKS
+    - EKS,S3,DynamoDB,ECR,
+    _ ECR
+    _ Docker
     
 
 
  ## Prerequisites on your Workstation <a id="Prerequisites"></a> 
- if needeed you  will find a folder with all bashscripts instalation you dont have on your workstation (Assuming your are under Ubuntu) 
+ if needeed you  will find a folder with all bashscripts instalations you dont have on your workstation (Assuming your are under Ubuntu) 
 '''
-- InstallAWS.sh 
+- InstallAWS.sh
 - InstallDocker.sh
-- github.sh
-- InstallEksctl.sh
-- Install-jenkins.sh
-- snap install kubectl --classic
+- InstallEksctl.sh (it include  kubectl Installation)
+- InstallJenkins.sh
+- InstallTerraform.sh  
 '''
 
 ## Jenkins on your Workstation <a id="Jenkins"></a>
@@ -81,7 +81,7 @@ export DASHBOARD_VERSION="v2.0.0"
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/${DASHBOARD_VERSION}/aio/deploy/recommended.yaml
 ```
 
-#### Copy the token of the Cluster
+#### Copy the token of the Cluster and open the proxy
 
 ```
 aws eks get-token --cluster-name yoni-eks | jq -r '.status.token'
@@ -91,7 +91,6 @@ aws eks get-token --cluster-name yoni-eks | jq -r '.status.token'
 kubectl proxy --port=8081 --address=0.0.0.0 --disable-filter=true &
 
 ```
-
 #### In your browser
 
 ```
