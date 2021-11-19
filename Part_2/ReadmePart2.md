@@ -57,13 +57,13 @@ it will be populate by a web application using Kubernetes and Docker.
    
 
 #### Create Pipeline:
-'''
+```
  pipeline section:
     - Pipeline script from SCM
     - SCM =  Git
     - Repository URL: https://github.com/yoni702/FinalProject.git
     - Script Path: Part_2/Jenkinsfile
-'''
+```
 
 ### If you want to Connect to the Cluster via eksctl
 
