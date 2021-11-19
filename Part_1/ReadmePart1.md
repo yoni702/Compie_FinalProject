@@ -1,4 +1,4 @@
-# This Section contains part 2 and 3 of the final project
+# This Section contains part 1 of the Final Project
 
 #### Table of Contents
  * [Git Repository](#Git)

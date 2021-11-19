@@ -1,4 +1,4 @@
-# This Section contains part 2 and 3 of the final project
+# This Section contains part 2 and 3 of the Final Project
 This Pipeline shows how to build a EKS Cluster within VPC on East-2 
 it will be populate by a web application using Kubernetes and Docker. 
 
