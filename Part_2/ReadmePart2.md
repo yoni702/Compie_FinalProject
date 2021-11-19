@@ -3,7 +3,7 @@ This Pipeline shows how to build a EKS Cluster within VPC on East-2
 it will be populate by a web application using Kubernetes and Docker. 
 
 #### Table of Contents
- * [000_Video Link](#Video)
+ * [Video Link](#Video)
  * [Git Repository](#Git)
  * [List of Tools & Technologies](#Technologies)
  * [Prerequisites on your Workstation](#Prerequisites)
@@ -35,25 +35,41 @@ it will be populate by a web application using Kubernetes and Docker.
 
  ## Prerequisites on your Workstation <a id="Prerequisites"></a> 
  if needeed you  will find a folder with all bashscripts instalations you dont have on your workstation (Assuming your are under Ubuntu) 
-'''
+
 - InstallAWS.sh
 - InstallDocker.sh
 - InstallEksctl.sh (it include  kubectl Installation)
 - InstallJenkins.sh
 - InstallTerraform.sh  
-'''
+
 
 ## Jenkins on your Workstation <a id="Jenkins"></a>
-    apt  install docker-compose
-    curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-jenkins/master/docker-compose.yml > docker-compose.yml
-    docker-compose up -d
-     - Port: 8080
-     - Username: user
-     - Password: bitnami
-    
-    #docker pull bitnami/jenkins:latest
-    #sudo docker pull jenkins/jenkins
-    #sudo docker run -d -p 11011:8080 --name=jenkins-master jenkins/jenkins
+
+If needed (run:InstallJenkins.sh)
+
+### Give to jenkins Permissions
+Jenkins user is added to the docker group. This will impact the security of your system;
+the docker group is root equivalent
+```
+sudo groupadd docker
+sudo usermod -aG docker jenkins
+```
+#### Edit the sudoers
+```
+sudo nano  /etc/sudoers
+```
+#### Paste this to give all permission to Jenkins 
+```
+jenkins    ALL=(ALL:ALL) ALL
+%docker   ALL=(ALL:ALL) ALL
+```
+
+#### Start Jenkins
+```
+sudo systemctl daemon-reload
+sudo systemctl start jenkins
+sudo systemctl status jenkins
+```
 
 
 ### Create TWO AWS Credentials:
