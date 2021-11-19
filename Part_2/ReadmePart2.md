@@ -1,18 +1,19 @@
-## This Section contains part 2 and 3 of the final project
+# This Section contains part 2 and 3 of the final project
 This Pipeline shows how to build a EKS Cluster within VPC on East-2 
 it will be populate by a web application using Kubernetes and Docker. 
 
-##### Table of Contents
+#### Table of Contents
  * [List of Tools & Technologies](#Technologies)
  * [Git Repository](#Git)
  * [Prerequisites on your Workstation](#Prerequisites)
  * [Jenkins on your Workstation](#Jenkins)
+ * [If you want to check via eksctl,Dashboard](#check)
 
- ### Git Repository <a id="Git"></a>
+ ## Git Repository <a id="Git"></a>
     https://github.com/yoni702/FinalProject.git
 
 
- ### List of Tools & Technologies <a id="Technologies"></a>
+ ## List of Tools & Technologies <a id="Technologies"></a>
     - Terraform
     - Ansible
     - Docker
@@ -20,7 +21,7 @@ it will be populate by a web application using Kubernetes and Docker.
     
 
 
- ### Prerequisites on your Workstation <a id="Prerequisites"></a> 
+ ## Prerequisites on your Workstation <a id="Prerequisites"></a> 
  if needeed you  will find a folder with all bashscripts instalation you dont have on your workstation (Assuming your are under Ubuntu) 
 '''
 - InstallAWS.sh 
@@ -31,7 +32,7 @@ it will be populate by a web application using Kubernetes and Docker.
 - snap install kubectl --classic
 '''
 
-### Jenkins on your Workstation <a id="Jenkins"></a>
+## Jenkins on your Workstation <a id="Jenkins"></a>
     apt  install docker-compose
     curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-jenkins/master/docker-compose.yml > docker-compose.yml
     docker-compose up -d
@@ -44,7 +45,7 @@ it will be populate by a web application using Kubernetes and Docker.
     #sudo docker run -d -p 11011:8080 --name=jenkins-master jenkins/jenkins
 
 
-#### Create TWO AWS Credentials:
+### Create TWO AWS Credentials:
 
     - Kind: Secret text
         - Secret: <Your Access Key Id>
@@ -56,7 +57,7 @@ it will be populate by a web application using Kubernetes and Docker.
     
    
 
-#### Create Pipeline:
+### Create Pipeline:
 ```
  pipeline section:
     - Pipeline script from SCM
@@ -65,20 +66,22 @@ it will be populate by a web application using Kubernetes and Docker.
     - Script Path: Part_2/Jenkinsfile
 ```
 
-### If you want to Connect to the Cluster via eksctl
+## If you want to check via eksctl,Dashboard<a id="check"></a>
+
+### Connect to the Cluster via eksctl
 
 ```
 aws eks --region us-east-2 update-kubeconfig --name yoni-eks
 ```
 
-### If You want to check via the Dashboard
+### Check via the Dashboard
 ```
 export DASHBOARD_VERSION="v2.0.0"
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/${DASHBOARD_VERSION}/aio/deploy/recommended.yaml
 ```
 
-#### Copy the token of the Cluster
+### Copy the token of the Cluster
 
 ```
 aws eks get-token --cluster-name yoni-eks | jq -r '.status.token'
@@ -89,7 +92,7 @@ kubectl proxy --port=8081 --address=0.0.0.0 --disable-filter=true &
 
 ```
 
-#### In your browser
+### In your browser
 
 ```
 http://127.0.0.1:8081/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
