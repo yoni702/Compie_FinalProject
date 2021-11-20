@@ -11,23 +11,14 @@ pipeline {
     }
     
     environment {
-        AWS_ACCOUNT_ID="227029025754"
-        AWS_DEFAULT_REGION="us-east-2" 
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-        IMAGE_REPO_NAME="yoni_ecr"
-        IMAGE_TAG="IMAGE_TAG"
-        REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')    
     }
 
     stages {
 
         stage('CheckOut') {
             steps {
-                // Clean before build
-                //cleanWs()
-                // We need to explicitly checkout from SCM here
                 checkout scm
             }
         }
@@ -94,6 +85,5 @@ pipeline {
                 }
             }
         }
-
     }
 }
