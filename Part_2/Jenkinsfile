@@ -1,6 +1,14 @@
 pipeline {
     agent any
     
+    //tools {
+       // terraform 'terraform_plugin'
+        //DockerTool 'docky'
+    //}
+    //options {
+        // This is required if you want to clean before build
+        //skipDefaultCheckout(true)
+    //}
     parameters {
         string(name: 'environment', defaultValue: 'terraform', description: 'Workspace/environment file to use for deployment')
         booleanParam(name: 'S3', defaultValue: false, description: 'Terraform Create-S3 for tfState')
@@ -60,6 +68,42 @@ pipeline {
                     sh "terraform apply --auto-approve -input=false"
                 }
 
+            }
+        }
+        
+        stage('Logging into AWS ECR') {
+            when {
+                equals expected: true, actual: params.docker
+            }
+            steps {
+                script {
+                sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+                }   
+            }
+        }
+
+    
+        stage('Building image') {
+            when {
+                equals expected: true, actual: params.docker
+            }
+            steps{
+                script {
+                    dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+                }
+            }
+        }
+   
+
+        stage('Pushing to ECR') {
+            when {
+                equals expected: true, actual: params.docker
+            }
+            steps{  
+                script {
+                    sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"
+                    sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+                }
             }
         }
 
