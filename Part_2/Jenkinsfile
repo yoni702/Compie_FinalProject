@@ -88,10 +88,8 @@ pipeline {
                 equals expected: true, actual: params.docker
             }
             steps{
-                dir("Part_2/003_terraform") {
+                dir("Part_2/guestbook-go") {
                     dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
-                }
-                script {
                 }
             }
         }
