@@ -23,7 +23,7 @@
                {
                   "name":"guestbook",
                   
-                  "image":"aws_account_id.dkr.ecr.region.amazonaws.com/my-repository:latest", 
+                  "image":"227029025754.dkr.ecr.region.amazonaws.com/yoni_ecr:latest", 
 
                   "ports":[
                      {
