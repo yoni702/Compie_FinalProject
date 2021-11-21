@@ -52,3 +52,29 @@ kubectl create -f guestbook-service.json
 
 
 //"image":"k8s.gcr.io/guestbook:v3",
+//sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"
+//sh 'docker build . -t "${IMAGE_REPO_NAME}:${IMAGE_TAG}"'
+
+kubectl delete replicationcontroller/guestbook
+kubectl delete replicationcontroller/redis-master
+kubectl delete replicationcontroller/redis-slave
+kubectl delete service/guestbook
+kubectl delete service/redis-slave
+kubectl delete service/redis-master
+
+
+
+    //tools {
+       // terraform 'terraform_plugin'
+        //DockerTool 'docky'
+    //}
+    //options {
+        // This is required if you want to clean before build
+        //skipDefaultCheckout(true)
+    //}
+
+
+
+                    // Clean before build
+                //cleanWs()
+                // We need to explicitly checkout from SCM here

@@ -100,13 +100,19 @@ Tip: It's better not running Jenkins from a Docker images ,if so you'll need to 
     - Script Path: Part_2/Jenkinsfile
 ```
 
-## If you want to check via eksctl,Dashboard<a id="check"></a>
+## If you want to check via ALB Dns, eksctl, Dashboard<a id="check"></a>
 
 ### Connect to the Cluster via eksctl
 
 ```
 aws eks --region us-east-2 update-kubeconfig --name yoni-eks
 ```
+
+### Check the Load Balancer DNS and append the port 3000 
+go to aws >> ec2>> load blancer 
+copy the DNS and append the port 3000
+      
+      You will see the app in your broswer
 
 ### Check via the Dashboard
 ```
