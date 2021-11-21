@@ -9,7 +9,7 @@
  * [004_ Destroy Terraform ](#destroy)
 
  ## Video <a id="Video"></a>
-    not done yet
+    https://youtu.be/T6Ydkq_Ia1c 
 
  ## Git Repository <a id="Git"></a>
     https://github.com/yoni702/FinalProject.git
