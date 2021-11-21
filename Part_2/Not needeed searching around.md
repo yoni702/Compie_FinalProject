@@ -48,3 +48,7 @@ kubectl create -f redis-slave-service.json
 kubectl create -f guestbook-controller.json
 kubectl create -f guestbook-service.json
 ```
+
+
+
+//"image":"k8s.gcr.io/guestbook:v3",
