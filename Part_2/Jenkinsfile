@@ -120,12 +120,12 @@ pipeline {
                     sh "docker ps -a"
                     sh "aws eks --region us-east-2 update-kubeconfig --name yoni-eks"
                     sh "kubectl get all"
-                    sh 'kubectl create -f redis-master-controller.json'
-                    sh 'kubectl create -f redis-master-service.json'
-                    sh 'kubectl create -f redis-slave-controller.json'
-                    sh 'kubectl create -f redis-slave-service.json'
-                    sh 'kubectl create -f guestbook-controller.json'
-                    sh 'kubectl create -f guestbook-service.json'
+                    sh 'kubectl apply -f redis-master-controller.json'
+                    sh 'kubectl apply -f redis-master-service.json'
+                    sh 'kubectl apply -f redis-slave-controller.json'
+                    sh 'kubectl apply -f redis-slave-service.json'
+                    sh 'kubectl apply -f guestbook-controller.json'
+                    sh 'kubectl apply -f guestbook-service.json'
                 }
             }
         }
