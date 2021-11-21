@@ -119,6 +119,7 @@ pipeline {
                     sh "docker ps"
                     sh "docker ps -a"
                     sh "aws eks --region us-east-2 update-kubeconfig --name yoni-eks"
+                    sh "aws ecr list-images --repository-name yoni_ecr --region=us-east-2"
                     sh "kubectl get all"
                     sh 'kubectl apply -f redis-master-controller.json'
                     sh 'kubectl apply -f redis-master-service.json'
@@ -126,6 +127,7 @@ pipeline {
                     sh 'kubectl apply -f redis-slave-service.json'
                     sh 'kubectl apply -f guestbook-controller.json'
                     sh 'kubectl apply -f guestbook-service.json'
+
                 }
             }
         }
