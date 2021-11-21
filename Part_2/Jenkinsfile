@@ -115,6 +115,9 @@ pipeline {
             }
             steps {
                 dir("Part_2/guestbook-go") {
+                    sh "docker images"
+                    sh "docker ps"
+                    sh "docker ps -a"
                     sh "aws eks --region us-east-2 update-kubeconfig --name yoni-eks"
                     sh "kubectl get all"
                     sh 'kubectl create -f redis-master-controller.json'
