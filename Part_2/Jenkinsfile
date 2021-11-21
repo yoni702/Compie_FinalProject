@@ -24,7 +24,6 @@ pipeline {
         AWS_ACCOUNT_ID="227029025754"
         AWS_DEFAULT_REGION="us-east-2" 
         IMAGE_REPO_NAME="yoni_ecr"
-        IMAGE_NAME="mine"
         IMAGE_TAG="1.1"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
 
@@ -90,7 +89,7 @@ pipeline {
             }
             steps{
                 dir("Part_2/guestbook-go") {
-                    sh 'docker build . -t "${IMAGE_REPO_NAME}:${IMAGE_TAG}"'
+                    //sh 'docker build . -t "${IMAGE_REPO_NAME}:${IMAGE_TAG}"'
                     sh "docker build -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} --pull=true /var/lib/jenkins/workspace/${env.JOB_NAME} \
                         && docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"
                 }
