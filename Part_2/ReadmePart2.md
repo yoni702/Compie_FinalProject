@@ -12,7 +12,7 @@ it will be populate by a web application using Kubernetes and Docker.
 
 
  ## Video <a id="Video"></a>
-   not done yet
+   https://youtu.be/wNdYdSRxTu4 
 
  ## Git Repository <a id="Git"></a>
     https://github.com/yoni702/FinalProject.git
