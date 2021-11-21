@@ -90,7 +90,6 @@ pipeline {
             }
             steps{
                 dir("Part_2/guestbook-go") {
-                    //sh 'docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"'
                     sh 'docker build . -t "${IMAGE_REPO_NAME}:${IMAGE_TAG}"'
                 }
             }
@@ -105,6 +104,7 @@ pipeline {
                 script {
                     sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"
                     sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+                    
                 }
             }
         }
@@ -117,10 +117,10 @@ pipeline {
                 dir("Part_2/guestbook-go") {
                     sh "aws eks --region us-east-2 update-kubeconfig --name yoni-eks"
                     sh "kubectl get all"
-                    sh 'kubectl create -f redis-master-controller.json'
-                    sh 'kubectl create -f redis-master-service.json'
-                    sh 'kubectl create -f redis-slave-controller.json'
-                    sh 'kubectl create -f redis-slave-service.json'
+                    //sh 'kubectl create -f redis-master-controller.json'
+                    //sh 'kubectl create -f redis-master-service.json'
+                    //sh 'kubectl create -f redis-slave-controller.json'
+                    //sh 'kubectl create -f redis-slave-service.json'
                     sh 'kubectl create -f guestbook-controller.json'
                     sh 'kubectl create -f guestbook-service.json'
                 }
