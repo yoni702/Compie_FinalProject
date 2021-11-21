@@ -117,10 +117,10 @@ pipeline {
                 dir("Part_2/guestbook-go") {
                     sh "aws eks --region us-east-2 update-kubeconfig --name yoni-eks"
                     sh "kubectl get all"
-                    //sh 'kubectl create -f redis-master-controller.json'
-                    //sh 'kubectl create -f redis-master-service.json'
-                    //sh 'kubectl create -f redis-slave-controller.json'
-                    //sh 'kubectl create -f redis-slave-service.json'
+                    sh 'kubectl create -f redis-master-controller.json'
+                    sh 'kubectl create -f redis-master-service.json'
+                    sh 'kubectl create -f redis-slave-controller.json'
+                    sh 'kubectl create -f redis-slave-service.json'
                     sh 'kubectl create -f guestbook-controller.json'
                     sh 'kubectl create -f guestbook-service.json'
                 }
