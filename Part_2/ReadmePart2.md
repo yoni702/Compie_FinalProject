@@ -12,7 +12,7 @@ it will be populate by a web application using Kubernetes and Docker.
 
 
  ## Video <a id="Video"></a>
-    https://github.com/yoni702/FinalProject.git
+   not done yet
 
  ## Git Repository <a id="Git"></a>
     https://github.com/yoni702/FinalProject.git
@@ -63,8 +63,13 @@ sudo nano  /etc/sudoers
 jenkins    ALL=(ALL:ALL) ALL
 %docker   ALL=(ALL:ALL) ALL
 ```
+#### Getting the token and login 
+on your Workstation where Jenkins is installed, run the aws configure as jenkins user
+```
+sudo -H -u jenkins aws configure
+```
 
-#### Start Jenkins
+#### START JENKINS
 ```
 sudo systemctl daemon-reload
 sudo systemctl start jenkins

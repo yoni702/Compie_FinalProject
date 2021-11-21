@@ -9,7 +9,7 @@
  * [004_ Destroy Terraform ](#destroy)
 
  ## Video <a id="Video"></a>
-    https://github.com/yoni702/FinalProject.git
+    not done yet
 
  ## Git Repository <a id="Git"></a>
     https://github.com/yoni702/FinalProject.git
@@ -71,4 +71,3 @@ Tip: Don't forget to Logout from Ansible-Controller
     terraform destroy
 ```
 
-Need Video!!!!!

@@ -23,7 +23,7 @@
                {
                   "name":"guestbook",
                   
-                  "image":"227029025754.dkr.ecr.us-east-2.amazonaws.com/yoni_ecr/mine:1.1", 
+                  "image":"227029025754.dkr.ecr.us-east-2.amazonaws.com/yoni_ecr:1.1", 
 
                   "ports":[
                      {
