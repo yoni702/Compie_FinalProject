@@ -55,7 +55,7 @@ pipeline {
                 dir("Part_2/003_terraform") {
                     sh 'pwd'
                     sh 'ls'
-                    sh "terraform init -input=false -reconfigure "
+                    sh "terraform init -input=false -upgrade -reconfigure "
                     sh "terraform apply --auto-approve -input=false"
                 }
 
