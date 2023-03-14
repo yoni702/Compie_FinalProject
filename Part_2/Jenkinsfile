@@ -15,7 +15,7 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_ACCOUNT_ID="227029025754"
-        AWS_DEFAULT_REGION="us-east-2" 
+        AWS_DEFAULT_REGION="us-east-1" 
         IMAGE_REPO_NAME="yoni_ecr"
         IMAGE_TAG="1.1"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
