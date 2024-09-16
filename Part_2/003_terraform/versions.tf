@@ -3,7 +3,7 @@ terraform {
   backend "s3" {
     bucket = "tfstateyonidevops"
     key = "app-state"
-    region = "us-east-2"
+    region = "us-east-1"
   }
   required_providers {
     aws = {
