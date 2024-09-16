@@ -1,7 +1,7 @@
 terraform {
   #Creates S3 backend
   backend "s3" {
-    bucket = "tfstateyoni"
+    bucket = "tfstateyonidevops"
     key = "app-state"
     region = "us-east-2"
   }
