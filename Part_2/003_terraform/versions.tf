@@ -1,14 +1,14 @@
 terraform {
   #Creates S3 backend
   backend "s3" {
-    bucket = "tfstateyonidevops"
+    bucket = "tfstateyoni"
     key = "app-state"
-    region = "us-east-1"
+    region = "us-east-2"
   }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "3.20.0"
+      version = ">= 3.20.0"
     }
 
     random = {
@@ -34,4 +34,3 @@ terraform {
 
   required_version = ">= 0.14"
 }
-
