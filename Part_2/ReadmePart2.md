@@ -97,7 +97,7 @@ Tip: It's better not running Jenkins from a Docker images ,if so you'll need to 
     - Pipeline script from SCM
     - SCM =  Git
     - Repository URL: https://github.com/yoni702/FinalProject.git
-    - Script Path: Part_2/Jenkinsfile
+    - Script Path: brew install terraform
 ```
 
 ## If you want to check via ALB Dns, eksctl, Dashboard<a id="check"></a>

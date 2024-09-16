@@ -19,11 +19,9 @@ pipeline {
         IMAGE_REPO_NAME="yoni_ecr"
         IMAGE_TAG="1.1"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-
     }
 
     stages {
-
         stage('CheckOut') {
             steps {
 
@@ -31,7 +29,6 @@ pipeline {
             }
         }
 
-            
         stage('Terraform S3 ') {
             when {
                 equals expected: true, actual: params.S3
